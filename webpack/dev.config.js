@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { isArray } from 'lodash';
+import path from 'path';
 
 import baseConfig from './base.config';
 import startKoa from './utils/start-koa';
@@ -58,16 +59,21 @@ export default {
         },
 
           { test: JS_REGEX, exclude: /node_modules/, loaders:[ 'react-hot','babel'] },
-          // {
-          //     test: /\.js$|.jsx$/,
-          //     exclude: [/node_modules/, /public/],
-          //     loaders: ['react-hot', 'babel']
-          // },
         {
           test: /\.css$/,
           loader: 'style!css?sourceMap!postcss',
           exclude: /node_modules/
-        }
+        },
+          {
+              test: /\.scss$|.css$/,
+              exclude: path.join(__dirname, '../app/styles/modules'),
+              loaders: [
+                  'style-loader',
+                  'css-loader?sourceMap',
+                  'autoprefixer-loader?browsers=last 2 version',
+                  'sass-loader?outputStyle=expanded&sourceMap'
+              ]
+          }
       ]
     },
     plugins: [

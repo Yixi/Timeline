@@ -5,8 +5,10 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
+require('styles/global/app.scss');
+
 export default class app extends Component {
-    static propTypes : {
+    static propTypes = {
         children: PropTypes.object.isRequired
     };
 
